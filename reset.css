@@ -145,6 +145,12 @@ a:where([class]) {
   display: inline-flex;
 }
 
+a {
+  all: unset;
+  display: inline-block; /* Если нужно, чтобы работали отступы */
+  cursor: pointer;
+}
+
 /**
     Курсор-рука при наведении на элемент
    */

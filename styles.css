@@ -1,4 +1,5 @@
-body {
+.container {
+  height: 100vh;
   display: flex;
   justify-content: center;
   margin: 0 30px;
@@ -11,6 +12,29 @@ label {
   font-weight: bold;
   cursor: pointer;
   color: #192a51;
+}
+
+.blur-background {
+  filter: blur(20px);
+  transition: 0.2s ease-in-out;
+}
+
+.close-btn {
+  position: absolute;
+  top: -30px;
+  right: 0;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  color: black;
+  transition: 0.3s;
+}
+
+.close-btn:hover {
+  color: red;
+  transform: scale(1.2);
 }
 
 /* Ширина скроллбара */
@@ -38,14 +62,29 @@ label {
   margin-top: 30px;
   display: flex;
   flex-direction: column;
-  min-width: 750px;
+  align-items: center;
+  max-width: 650px;
   gap: 30px;
   align-items: center;
+}
+
+.add_a-car {
+  display: none;
+}
+
+#close-modal {
+  display: none;
+}
+
+.wrap_select-a {
+  display: flex;
+  gap: 10px;
 }
 
 .search_field {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 10px;
 }
 
@@ -57,6 +96,7 @@ label {
 .cars_list {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 20px;
 }
 
@@ -98,7 +138,7 @@ label {
 }
 
 .input {
-  width: 500px;
+  width: 400px;
   padding: 20px;
   font-size: 16px;
   border: 2px solid #ccc;
@@ -112,6 +152,7 @@ label {
 
 #filtered_cars {
   appearance: none;
+  width: 400px;
   background-color: white;
   border: 2px solid #007bff;
   border-radius: 15px;
@@ -129,8 +170,9 @@ label {
   resize: none;
 }
 
-.section_right button {
-  width: 500px;
+#add_car,
+.add_a-car {
+  width: 400px;
   padding: 20px;
   color: #24281e;
   font-size: 16px;
@@ -139,7 +181,8 @@ label {
   border-radius: 5px;
 }
 
-.section_right button:hover {
+#add_car:hover,
+.add_a-car:hover {
   background-color: rgba(66, 85, 90, 0.54);
 
   transition: cubic-bezier(0.23, 1, 0.32, 1) 0.5s;

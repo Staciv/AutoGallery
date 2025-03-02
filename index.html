@@ -6,43 +6,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./reset.css" />
     <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./responsive.css">
     <title>Auto Gallery</title>
 </head>
 
 <body>
-    <section class="section_left">
-        <div class="search_field">
-            <label for="search_box">Search*</label>
-            <input type="text" id="search_box" class="input" placeholder="Enter a keyword" />
-            <label for="filtered_cars">Sort By:</label>
-            <select name="filtered_cars" id="filtered_cars">
-                <option value="brand_A-Z">Brand A-Z</option>
-                <option value="brand_Z-A">Brand Z-A</option>
-                <option value="the_cheapest">The cheapest</option>
-                <option selected value="the_most-expensive">The most expensive</option>
-                <option value="the_newest">The newest</option>
-                <option value="the_oldest">The oldest</option>
+    <div class="container">
+        <section class="section_left">
+            <div class="search_field">
+                <label for="search_box">Search*</label>
+                <input type="text" id="search_box" class="input" placeholder="Enter a keyword" />
+                <label for="filtered_cars">Sort By:</label>
+                <div class="wrap_select-a">
+                    <select name="filtered_cars" id="filtered_cars">
+                        <option value="brand_A-Z">Brand A-Z</option>
+                        <option value="brand_Z-A">Brand Z-A</option>
+                        <option value="the_cheapest">The cheapest</option>
+                        <option selected value="the_most-expensive">The most expensive</option>
+                        <option value="the_newest">The newest</option>
+                        <option value="the_oldest">The oldest</option>
+                    </select>
+                    <button class="add_a-car">Add a car</и>
+                </div>
+            </div>
+            <div class="cars">
+                <ol class="cars_list"></ol>
+            </div>
+        </section>
+        <div class="vertical_line"></div>
 
-            </select>
-        </div>
-        <div class="cars">
-            <ol class="cars_list"></ol>
-        </div>
-    </section>
-    <div class="vertical_line"></div>
-    <section class="section_right">
-        <label for="car_brand-input">Brand*</label>
-        <input type="text" id="car_brand-input" class="input" placeholder="Enter Brand" />
-        <label for="car_link-input">Image*</label>
-        <input type="text" id="car_link-input" class="input" placeholder="Image Link" />
-        <label for="description_input">Description*</label>
-        <textarea id="description_input" class="input" placeholder="Description"></textarea>
-        <label for="prise_input">Prise*</label>
-        <input type="number" id="prise_input" class="input" placeholder="Price in $" />
-        <label for="year_input">Year*</label>
-        <input type="date" id="year_input" class="input" placeholder="Year" />
-        <button id="add_car" type="button">Add Car</button>
-    </section>
+        <section class="section_right">
+            <button class="close-modal" style="display: none;">&times;</button>
+            <label for="car_brand-input">Brand*</label>
+            <input type="text" id="car_brand-input" class="input" placeholder="Enter Brand" />
+            <label for="car_link-input">Image*</label>
+            <input type="text" id="car_link-input" class="input" placeholder="Image Link" />
+            <label for="description_input">Description*</label>
+            <textarea id="description_input" class="input" placeholder="Description"></textarea>
+            <label for="prise_input">Prise*</label>
+            <input type="number" id="prise_input" class="input" placeholder="Price in $" />
+            <label for="year_input">Year*</label>
+            <input type="date" id="year_input" class="input" placeholder="Year" />
+            <button id="add_car" type="button">Add Car</button>
+        </section>
+    </div>
 
     <script src="./index.js" type="module"></script>
 </body>

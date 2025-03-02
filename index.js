@@ -2,6 +2,10 @@ import { cars } from "./driveList.js";
 
 const searchBox = document.getElementById("search_box");
 const searchCarsSelect = document.getElementById("filtered_cars");
+const modalButtonAddCar = document.querySelector(".add_a-car");
+const closeModal = document.querySelector(".close-modal");
+const sectionRight = document.querySelector(".section_right");
+const sectionLeft = document.querySelector(".section_left");
 const carsList = document.querySelector(".cars_list");
 const carBrandInput = document.getElementById("car_brand-input");
 const carLinkInput = document.getElementById("car_link-input");
@@ -53,6 +57,7 @@ const renderCars = (cars, container) => {
     carItemRight.className = "car_item-right";
     carItemLeftImage.className = "item_image";
     carItemRightBrandYear.className = "item_title";
+    carItemRightDescription.className = "description";
 
     carItemLeftImage.src = car.imageUrl;
     deleteImage.src = "./images/delete.png";
@@ -95,6 +100,9 @@ const addCar = () => {
     searchBox.value = "";
     yearInput.value = "";
 
+    sectionRight.classList.remove("active");
+    sectionLeft.classList.remove("blur-background");
+
     inputsCar.forEach((car) => {
       car.classList.remove("border_red");
     });
@@ -111,6 +119,18 @@ const addCar = () => {
   }
 
   renderCars(carsStore, carsList);
+};
+
+const modalAddCar = () => {
+  sectionRight.classList.add("active");
+  sectionLeft.classList.add("blur-background");
+  closeModal.classList.add("close-btn");
+  closeModal.style.display = "block";
+};
+
+const closeModalWindow = () => {
+  sectionRight.classList.remove("active");
+  sectionLeft.classList.remove("blur-background");
 };
 
 const deleteButtonCar = (indexToDelete, cars) => {
@@ -190,5 +210,7 @@ const filterCars = (event) => {
 renderCars(carsStore, carsList);
 
 searchBox.addEventListener("input", searchCars);
+modalButtonAddCar.addEventListener("click", modalAddCar);
+closeModal.addEventListener("click", closeModalWindow);
 addCarButton.addEventListener("click", addCar);
 searchCarsSelect.addEventListener("change", filterCars);
