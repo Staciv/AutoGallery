@@ -99,7 +99,8 @@
     width: 200px;
   }
 
-  .input {
-    max-width: 300px;
+  .input,
+  #add_car {
+    max-width: 350px;
   }
 }
