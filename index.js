@@ -1,7 +1,7 @@
 import { cars } from "./cars-mock.js";
 
 const searchBox = document.getElementById("search_box");
-const searchCarsSelect = document.getElementById("filtered_cars");
+const searchCarsSelect = document.getElementById("sort_cars-select");
 const modalButtonAddCar = document.querySelector(".add_a-car");
 const closeModal = document.querySelector(".close-modal");
 const sectionRight = document.querySelector(".section_right");

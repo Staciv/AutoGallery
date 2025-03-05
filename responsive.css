@@ -76,6 +76,10 @@
     margin: 0 6px;
   }
 
+  .cars_list {
+    gap: 10px;
+  }
+
   .car_item {
     flex-direction: column;
     align-items: center;
@@ -87,7 +91,15 @@
     height: auto;
   }
 
+  .section_left {
+    gap: 10px;
+  }
+
   #sort_cars-select {
     width: 200px;
+  }
+
+  .input {
+    max-width: 300px;
   }
 }
