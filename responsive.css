@@ -28,25 +28,13 @@
 /* -------------------------------------------------------------- */
 
 @media screen and (max-width: 992px) {
-  .container {
-  }
-  .section_left {
-  }
   .item_image {
     max-width: 300px;
-  }
-  .description {
-  }
-  .search_field {
-  }
-  .input {
   }
   .cars {
     overflow: auto;
     scrollbar-width: none;
     padding: 0;
-  }
-  .cars_list {
   }
   .vertical_line {
     display: none;
@@ -83,36 +71,11 @@
 
 /* -------------------------------------------------------------- */
 
-@media screen and (max-width: 768px) {
-  .section_left {
-  }
-  .search_field {
-  }
-  .input {
-  }
-  .cars {
-  }
-  .cars_list {
-  }
-  .vertical_line {
-  }
-  .section_right {
-  }
-}
-
-/* -------------------------------------------------------------- */
-
 @media screen and (max-width: 480px) {
-  .section_left {
+  .container {
+    margin: 0 6px;
   }
-  .search_field {
-  }
-  .input {
-  }
-  .cars {
-  }
-  .cars_list {
-  }
+
   .car_item {
     flex-direction: column;
     align-items: center;
@@ -124,16 +87,7 @@
     height: auto;
   }
 
-  .input {
-    width: 300px;
-  }
-
-  #filtered_cars {
+  #sort_cars-select {
     width: 200px;
-  }
-
-  .vertical_line {
-  }
-  .section_right {
   }
 }

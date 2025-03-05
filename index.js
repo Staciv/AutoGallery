@@ -1,4 +1,4 @@
-import { cars } from "./driveList.js";
+import { cars } from "./cars-mock.js";
 
 const searchBox = document.getElementById("search_box");
 const searchCarsSelect = document.getElementById("filtered_cars");
@@ -14,7 +14,7 @@ const priseInput = document.getElementById("prise_input");
 const yearInput = document.getElementById("year_input");
 const addCarButton = document.getElementById("add_car");
 
-const carsStore = cars
+let carsStore = cars
   .map((car) => {
     const newCar = { ...car };
 
@@ -25,8 +25,7 @@ const carsStore = cars
     return newCar;
   })
   .sort((a, b) => b.price - a.price);
-
-let filteredCars = carsStore;
+let sortedCars = carsStore;
 
 const inputsCar = [
   carBrandInput,
@@ -36,8 +35,8 @@ const inputsCar = [
   yearInput,
 ];
 
-const renderCars = (cars, container) => {
-  container.innerHTML = "";
+const renderCars = (cars) => {
+  carsList.innerHTML = "";
 
   cars.forEach((car, index) => {
     const carItem = document.createElement("li");
@@ -65,7 +64,7 @@ const renderCars = (cars, container) => {
     carItemRightDescription.textContent = car.description;
     carItemRightPrice.textContent = `${car.price} $`;
 
-    container.appendChild(carItem);
+    carsList.appendChild(carItem);
     carItemRight.appendChild(deleteButton);
     deleteButton.appendChild(deleteImage);
     carItem.appendChild(carItemLeft);
@@ -118,7 +117,7 @@ const addCar = () => {
     });
   }
 
-  renderCars(carsStore, carsList);
+  renderCars(carsStore);
 };
 
 const modalAddCar = () => {
@@ -134,13 +133,14 @@ const closeModalWindow = () => {
 };
 
 const deleteButtonCar = (indexToDelete, cars) => {
-  let isDelete = confirm("Are you sure you want to delete?");
-  if (isDelete) {
-    const filteredCarsDelete = cars.filter(
-      (_, index) => indexToDelete != index
-    );
-    filteredCars = filteredCarsDelete;
-    return renderCars(filteredCars, carsList);
+  const isDeleteConfirmed = confirm("Are you sure you want to delete?");
+
+  if (isDeleteConfirmed) {
+    sortedCars = cars.filter((_, index) => indexToDelete != index);
+
+    carsStore = sortedCars;
+
+    return renderCars(carsStore);
   }
 };
 
@@ -155,62 +155,53 @@ const searchCars = (event) => {
     }
   });
 
-  filteredCars = newSearchCars;
+  sortedCars = newSearchCars;
 
-  renderCars(filteredCars, carsList);
-  if (filteredCars.length === 0) {
-    const ResultNotFound = document.createElement("span");
-    ResultNotFound.textContent = "Result not found";
-    carsList.appendChild(ResultNotFound);
+  renderCars(sortedCars);
+
+  if (sortedCars.length === 0) {
+    const resultNotFoundElement = document.createElement("span");
+
+    resultNotFoundElement.textContent = "Result not found";
+
+    carsList.appendChild(resultNotFoundElement);
   }
 };
 
-const filterCarsAZ = () => {
-  filteredCars = carsStore.sort((a, b) => a.brand.localeCompare(b.brand));
-  renderCars(filteredCars, carsList);
-};
-const filterCarsZA = () => {
-  filteredCars = carsStore.sort((a, b) => b.brand.localeCompare(a.brand));
-  renderCars(filteredCars, carsList);
-};
+const sortByNameAsc = () =>
+  carsStore.sort((a, b) => a.brand.localeCompare(b.brand));
+const sortByNameDesc = () =>
+  carsStore.sort((a, b) => b.brand.localeCompare(a.brand));
+const sortByPriceAsc = () => carsStore.sort((a, b) => a.price - b.price);
+const sortByPriceDesc = () => carsStore.sort((a, b) => b.price - a.price);
+const sortByYearDesc = () => carsStore.sort((a, b) => b.year - a.year);
+const sortByYearAsc = () => carsStore.sort((a, b) => a.year - b.year);
 
-const filterTheCheapest = () => {
-  const filteredPriceCheapest = carsStore.sort((a, b) => a.price - b.price);
-  renderCars(filteredPriceCheapest, carsList);
-};
-const filterTheMostExpensive = () => {
-  const filteredPriceExpensive = carsStore.sort((a, b) => b.price - a.price);
-  renderCars(filteredPriceExpensive, carsList);
-};
-const filterTheNewest = () => {
-  const filteredYearNewest = carsStore.sort((a, b) => b.year - a.year);
-  renderCars(filteredYearNewest, carsList);
-};
-const filterTheOldest = () => {
-  const filteredYearOldest = carsStore.sort((a, b) => a.year - b.year);
-  renderCars(filteredYearOldest, carsList);
-};
+const sortCars = (event) => {
+  let newSortedCars = [];
 
-const filterCars = (event) => {
   if (event.target.value === "the_cheapest") {
-    filterTheCheapest();
+    newSortedCars = sortByPriceAsc();
   } else if (event.target.value === "the_most-expensive") {
-    filterTheMostExpensive();
+    newSortedCars = sortByPriceDesc();
   } else if (event.target.value === "the_newest") {
-    filterTheNewest();
+    newSortedCars = sortByYearDesc();
   } else if (event.target.value === "the_oldest") {
-    filterTheOldest();
+    newSortedCars = sortByYearAsc();
   } else if (event.target.value === "brand_A-Z") {
-    filterCarsAZ();
+    newSortedCars = sortByNameAsc();
   } else if (event.target.value === "brand_Z-A") {
-    filterCarsZA();
+    newSortedCars = sortByNameDesc();
   }
+
+  sortedCars = newSortedCars;
+  renderCars(newSortedCars);
 };
 
-renderCars(carsStore, carsList);
+renderCars(carsStore);
 
 searchBox.addEventListener("input", searchCars);
 modalButtonAddCar.addEventListener("click", modalAddCar);
 closeModal.addEventListener("click", closeModalWindow);
 addCarButton.addEventListener("click", addCar);
-searchCarsSelect.addEventListener("change", filterCars);
+searchCarsSelect.addEventListener("change", sortCars);
